@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Gallery;
 
-class GalleriesController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,10 +12,9 @@ class GalleriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $gallery = Gallery::all();
-        return response()->json($gallery);
-        
+    {
+        //
+
     }
 
     /**

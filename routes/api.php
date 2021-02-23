@@ -20,4 +20,8 @@ use App\Http\Controllers\GalleriesController;
 // });
 
 Route::get('/', [GalleriesController::class, 'index']);
+Route::get('/gallery/{id}', [GalleriesController::class, 'show']);
+Route::post('/create', [GalleriesController::class, 'store']);
+Route::put('/edit-gallery/{id}',[GalleriesController::class, 'update']);
+Route::delete('/gallery/{id}', [GalleriesController::class, 'destroy']);
 
