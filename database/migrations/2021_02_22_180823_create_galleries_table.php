@@ -22,7 +22,6 @@ class CreateGalleriesTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->string('imageUrl');
             $table->timestamps();
         });
     }

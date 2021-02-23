@@ -14,7 +14,7 @@ class GalleriesController extends Controller
      */
     public function index()
     {   
-        $gallery = Gallery::all();
+        $gallery = Gallery::with('user', 'pictures')->orderBy('id', 'DESC')->get();
         return response()->json($gallery);
         
     }
@@ -27,7 +27,9 @@ class GalleriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $newGallery = Gallery::create($data);
+        return response()->json($newGallery);
     }
 
     /**

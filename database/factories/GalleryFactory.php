@@ -25,7 +25,6 @@ class GalleryFactory extends Factory
             'name' => $this->faker->word,
             'description' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
             'author' => $this->faker->numberBetween(1, 10),
-            'imageUrl' =>$this->faker->url
         ];
     }
 }
