@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GalleriesController;
+use App\Http\Controllers\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +31,8 @@ Route::put('/edit-gallery/{id}',[GalleriesController::class, 'update']);
 Route::delete('/galleries/{id}', [GalleriesController::class, 'destroy']);
 
 // User routes
+
+Route::post('/register', [AuthController::class, 'register'])->middleware('guest:api');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
 
