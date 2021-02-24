@@ -19,9 +19,14 @@ use App\Http\Controllers\GalleriesController;
 //     return $request->user();
 // });
 
+
+// Gallery routes
+
 Route::get('/', [GalleriesController::class, 'index']);
-Route::get('/gallery/{id}', [GalleriesController::class, 'show']);
+Route::get('/galleries/{id}', [GalleriesController::class, 'show']);
 Route::post('/create', [GalleriesController::class, 'store']);
 Route::put('/edit-gallery/{id}',[GalleriesController::class, 'update']);
-Route::delete('/gallery/{id}', [GalleriesController::class, 'destroy']);
+Route::delete('/galleries/{id}', [GalleriesController::class, 'destroy']);
+
+// User routes
 

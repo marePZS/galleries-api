@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Gallery;
+use App\Http\Requests\CreateGalleryRequest;
+use App\Http\Requests\UpdateGalleryRequest;
+
 
 class GalleriesController extends Controller
 {
@@ -15,8 +18,7 @@ class GalleriesController extends Controller
     public function index()
     {   
         $gallery = Gallery::with('user', 'pictures')->orderBy('id', 'DESC')->get();
-        return response()->json($gallery);
-        
+        return response()->json($gallery);    
     }
 
     /**
@@ -25,9 +27,9 @@ class GalleriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateGalleryRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $newGallery = Gallery::create($data);
         return response()->json($newGallery);
     }
@@ -40,7 +42,8 @@ class GalleriesController extends Controller
      */
     public function show($id)
     {
-        //
+        $gallery = Gallery::findOrFail($id);
+        return response()->json($gallery);
     }
 
     /**
@@ -50,9 +53,12 @@ class GalleriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateGalleryRequest $request, $id)
     {
-        //
+        $data = $request->validated();
+        $gallery = Gallery::findOrFail($id);
+        $gallery->update($data);
+        return response()->json($gallery);
     }
 
     /**
@@ -63,6 +69,8 @@ class GalleriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $gallery = Gallery::findOrFail($id);
+        $gallery->delete();
+        return response()->json($gallery);
     }
 }
