@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Gallery;
-use App\Http\Requests\CreateGalleryRequest;
-use App\Http\Requests\UpdateGalleryRequest;
+use App\Http\Requests\CreateCommentRequest;
 
-
-class GalleriesController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +13,8 @@ class GalleriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $gallery = Gallery::with('user', 'pictures')->orderBy('id', 'DESC')->get();
-        return response()->json($gallery);    
+    {
+        //
     }
 
     /**
@@ -27,11 +23,11 @@ class GalleriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateGalleryRequest $request)
+    public function store(CreateCommentRequest $request)
     {
         $data = $request->validated();
-        $newGallery = auth()->user()->galleries()->create($data);
-        return response()->json($newGallery);
+        $newComment = Comment::create($data);
+        return response()->json($newComment);
     }
 
     /**
@@ -42,8 +38,8 @@ class GalleriesController extends Controller
      */
     public function show($id)
     {
-        $gallery = Gallery::findOrFail($id);
-        return response()->json($gallery);
+        $comment = Comment::findOrFail($id);
+        return response()->json($comment);
     }
 
     /**
@@ -53,12 +49,9 @@ class GalleriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateGalleryRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = $request->validated();
-        $gallery = Gallery::findOrFail($id);
-        $gallery->update($data);
-        return response()->json($gallery);
+        //
     }
 
     /**
@@ -69,8 +62,8 @@ class GalleriesController extends Controller
      */
     public function destroy($id)
     {
-        $gallery = Gallery::findOrFail($id);
-        $gallery->delete();
-        return response()->json($gallery);
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+        return response()->json($comment);
     }
 }

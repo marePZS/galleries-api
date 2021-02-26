@@ -33,6 +33,6 @@ Route::delete('/galleries/{id}', [GalleriesController::class, 'destroy']);
 // User routes
 
 Route::post('/register', [AuthController::class, 'register'])->middleware('guest:api');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
-
+Route::post('/login', [AuthController::class, 'login'])->middleware('guest:api');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
+Route::get('/user',[AuthController::class, 'me']);

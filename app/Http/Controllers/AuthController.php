@@ -47,5 +47,17 @@ class AuthController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function me()
+    {
+        return auth('api')->user();
+    }
+
+    public function refreshToken()
+    {
+        $token = auth('api')->refresh();
+        return [
+        'token' => $token
+        ];
+    }
 
 }  
