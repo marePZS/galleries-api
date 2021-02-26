@@ -24,7 +24,7 @@ use App\Http\Controllers\AuthController;
 
 // Gallery routes
 
-Route::get('/', [GalleriesController::class, 'index']);
+Route::get('/all', [GalleriesController::class, 'index']);
 Route::get('/galleries/{id}', [GalleriesController::class, 'show']);
 Route::post('/create', [GalleriesController::class, 'store']);
 Route::put('/edit-gallery/{id}',[GalleriesController::class, 'update']);

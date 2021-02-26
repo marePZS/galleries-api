@@ -15,6 +15,10 @@ class Gallery extends Model
         'author',
     ];
 
+    public static function search($filter="") {
+        return self::where("name || description", "LIKE", "%$filter%");
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'author');

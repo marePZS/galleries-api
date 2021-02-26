@@ -15,10 +15,11 @@ class GalleriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
-        $gallery = Gallery::with('user', 'pictures')->orderBy('id', 'DESC')->get();
-        return response()->json($gallery);    
+        $filter = $request->query();
+        $gallery = Gallery::search($filter)->with('user', 'pictures')->orderBy('id', 'DESC')->get();
+        return response()->json($gallery);  
     }
 
     /**
