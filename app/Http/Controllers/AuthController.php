@@ -12,9 +12,9 @@ class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-        $data = $request->validated();
-        $data['password'] = Hash::make($data['password']);
-        $user = User::create($data);
+        $userData = $request->validated();
+        $userData['password'] = Hash::make($userData['password']);
+        $user = User::create($userData);
         $token = auth('api')->login($user);
 
         return [
@@ -44,7 +44,7 @@ class AuthController extends Controller
     public function logout()
     {
         $result = auth('api')->logout();
-        return response()->json(['success' => true]);
+        return response()->json(['logout' => true]);
     }
 
     public function me()
@@ -56,7 +56,7 @@ class AuthController extends Controller
     {
         $token = auth('api')->refresh();
         return [
-        'token' => $token
+            'token' => $token
         ];
     }
 

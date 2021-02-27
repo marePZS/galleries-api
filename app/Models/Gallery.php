@@ -16,7 +16,7 @@ class Gallery extends Model
     ];
 
     public static function search($filter="") {
-        return self::where("name || description", "LIKE", "%$filter%");
+        return self::where("name", "LIKE", "%$filter%");
     }
 
     public function user()

@@ -17,9 +17,9 @@ class GalleriesController extends Controller
      */
     public function index(Request $request)
     {   
-        $filter = $request->query();
-        $gallery = Gallery::search($filter)->with('user', 'pictures')->orderBy('id', 'DESC')->get();
-        return response()->json($gallery);  
+        $filter = $request->query('filter', '');
+        $galleries = Gallery::search($filter)->with('user', 'pictures')->orderBy('id', 'DESC')->get();
+        return response()->json($galleries);  
     }
 
     /**

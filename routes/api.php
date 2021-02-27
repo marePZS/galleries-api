@@ -24,15 +24,15 @@ use App\Http\Controllers\AuthController;
 
 // Gallery routes
 
-Route::get('/all', [GalleriesController::class, 'index']);
-Route::get('/galleries/{id}', [GalleriesController::class, 'show']);
-Route::post('/create', [GalleriesController::class, 'store']);
-Route::put('/edit-gallery/{id}',[GalleriesController::class, 'update']);
-Route::delete('/galleries/{id}', [GalleriesController::class, 'destroy']);
+Route::get('/', [GalleriesController::class, 'index'])->middleware('guest:api');
+Route::get('/galleries/{id}', [GalleriesController::class, 'show'])->middleware('auth:api');
+Route::post('/create', [GalleriesController::class, 'store'])->middleware('auth:api');
+Route::put('/edit-gallery/{id}',[GalleriesController::class, 'update'])->middleware('auth:api');
+Route::delete('/galleries/{id}', [GalleriesController::class, 'destroy'])->middleware('auth:api');
 
 // User routes
 
 Route::post('/register', [AuthController::class, 'register'])->middleware('guest:api');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest:api');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
-Route::get('/user',[AuthController::class, 'me']);
+Route::get('/user',[AuthController::class, 'me'])->middleware('auth:api');
